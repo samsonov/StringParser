@@ -69,7 +69,6 @@ public class RecordCollector {
             String key = String.join(" ", words);
             LogRecordGroup record = recordCollection.get(key);
             if (record != null) {
-                record.getDifferentWords().add(word);
                 record.getOrigRecords().add(str);
             } else {
                 record = new LogRecordGroup(new LinkedList<>(Arrays.asList(str)), i);
@@ -84,7 +83,7 @@ public class RecordCollector {
         try {
             writer = new BufferedWriter(new FileWriter(outputFile));
             for (Map.Entry<String, LogRecordGroup> record : recordCollection.entrySet()) {
-                if (record.getValue().getDifferentWords().size() > 1) {
+                if (record.getValue().getOrigRecords().size() > 1) {
                     writeGroup(record.getValue(), writer);
                 }
             }
